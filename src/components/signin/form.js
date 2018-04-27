@@ -1,22 +1,21 @@
 import React, { Component } from 'react';
+import FieldSignIn from './field';
+import { fetchSignIn } from '../../store/action';
+import { connect } from 'react-redux';
 
 class FormSignIn extends Component {
     render() {
-        return (
-            <form style={{border: '1px solid black', padding: '10px', width: '10em', margin:'10px'}}>
-                <span style={{fontSize: '2em', fontWeight: 'bold'}}>Sign in</span>
-                <p>
-                    <label>Email:</label><br />
-                    <input type="text" />
-                </p>
-                <p>
-                    <label>Password:</label><br />
-                    <input type="password" />
-                </p>
-                <input type="submit" value="Send" />
-            </form>
-        );
+        return <FieldSignIn onSubmit={(values) => this.props.dispatch(fetchSignIn(values))} />;
     }
 }
 
-export default FormSignIn;
+function mapStateToProps (state) {
+    console.log(state);
+    return {
+        todoApp: state.todoApp.result
+    }
+}
+
+const ConnectedSignIn = connect(mapStateToProps)(FormSignIn);
+
+export default ConnectedSignIn;

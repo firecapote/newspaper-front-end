@@ -1,30 +1,26 @@
 import React, { Component } from 'react';
+import FieldSignUp from './field';
+import { fetchSignUp } from '../../store/action';
+import { connect } from 'react-redux';
 
 class FormSignUp extends Component {
     render() {
+        const resultCreate = this.props.todoApp;
         return (
-            <form style={{border: '1px solid black', padding: '10px', width: '10em', margin:'10px'}}>
-                <span style={{fontSize: '2em', fontWeight: 'bold'}}>Sign up</span>
-                <p>
-                    <label>Name:</label><br />
-                    <input type="text" />
-                </p>
-                <p>
-                    <label>Email:</label><br />
-                    <input type="text" />
-                </p>
-                <p>
-                    <label>Password:</label><br />
-                    <input type="password" />
-                </p>
-                <p>
-                    <label>Age:</label><br />
-                    <input type="text" />
-                </p>
-                    <input type="submit" value="Send" />
-            </form>
+            <div>
+                <FieldSignUp onSubmit={(values) => this.props.dispatch(fetchSignUp(values))} />
+                <p>{resultCreate}</p>
+            </div>
         );
     }
 }
 
-export default FormSignUp;
+function mapStateToProps (state) {
+    return {
+        todoApp: state.todoApp.result
+    }
+}
+
+const ConnectedSignUp = connect(mapStateToProps)(FormSignUp);
+
+export default ConnectedSignUp;

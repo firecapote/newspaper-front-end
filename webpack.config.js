@@ -3,7 +3,7 @@ const path = require('path'),
 
 module.exports = {
     entry: [
-        'webpack-dev-server/client?http://localhost:3000/',
+        'webpack-dev-server/client?http://localhost:3030/',
         'webpack/hot/only-dev-server',
         './src/js/index'
     ],
@@ -29,9 +29,15 @@ module.exports = {
     },
     devServer: {
         contentBase: __dirname + '/dist',
-        port: 3000,
+        port: 3030,
         historyApiFallback: true,
-        hot: true
+        hot: true,
+        proxy: {
+            "/api": {
+                target: "http://localhost:3000",
+                pathRewrite: {"^/api" : ""}
+            }
+        }
     },
     plugins: [
         new HtmlWebpackPlugin({

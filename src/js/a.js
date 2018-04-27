@@ -1,1 +1,0 @@
-export const A = () => {console.log ("Build project completed");};
