@@ -1,15 +1,19 @@
-export const SIGN_IN = 'SIGN_IN';
-export const SIGN_UP = 'SIGN_UP';
-export const FETCH_SIGN_IN = 'FETCH_SIGN_IN';
-export const FETCH_SIGN_UP = 'FETCH_SIGN_UP';
+import {
+    FETCH_SIGN_IN,
+    FETCH_SIGN_UP,
+    SIGN_IN,
+    SIGN_UP,
+    FETCH_ALL_POSTS,
+    ADD_ALL_POSTS
+} from '../constants/actions';
 
 export const UserInfo =  {
-    success: false,
     result: '',
-    token: 'empty',
+    token: '',
+    allPosts: [],
     info: {
-        email: 'empty',
-        name: 'empty'
+        email: '',
+        name: ''
     }
 };
 
@@ -27,4 +31,12 @@ export function signIn(userInfo) {
 
 export function signUp(userInfo) {
     return { type: SIGN_UP, userInfo }
+}
+
+export function fetchAllPosts(values) {
+    return { type: FETCH_ALL_POSTS, payload: values }
+}
+
+export function addAllPosts(allPosts) {
+    return { type: ADD_ALL_POSTS, allPosts }
 }
